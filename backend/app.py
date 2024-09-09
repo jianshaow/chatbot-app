@@ -3,15 +3,15 @@ from flask import Flask, request, send_from_directory
 
 frontend = os.path.abspath(os.path.join("../frontend", "out"))
 frontend = os.environ.get("FRONTEND_DIR", frontend)
-static_folder = os.path.join(frontend, "static")
 
-app = Flask(__name__, static_folder=static_folder)
+app = Flask(__name__)
 
 
 @app.route("/", defaults={"path": ""})
-@app.route("/<path>")
+@app.route("/<path:path>")
 def main(path):
-    if path == "" or path == "setting":
+    print("path:", path)
+    if path == "":
         return send_from_directory(frontend, "index.html")
     else:
         return send_from_directory(frontend, path)
