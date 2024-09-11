@@ -23,7 +23,7 @@ messeges = ["hello,", " how", " are you!", " what can", " I do for you?"]
 def generate():
     for message in messeges:
         yield f'0:"{message}"\n'
-        time.sleep(1)
+        time.sleep(0.5)
     yield 'e:{"finishReason":"stop","usage":{"promptTokens":null,"completionTokens":null}}\n'
     yield 'd:{"finishReason":"stop","usage":{"promptTokens":null,"completionTokens":null}}\n'
 
