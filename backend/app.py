@@ -1,5 +1,5 @@
-import os
-from flask import Flask, request, send_from_directory
+import os, time
+from flask import Flask, Response, send_from_directory
 
 frontend = os.path.abspath(os.path.join("../frontend", "out"))
 frontend = os.environ.get("FRONTEND_DIR", frontend)
@@ -15,6 +15,22 @@ def main(path):
         return send_from_directory(frontend, "index.html")
     else:
         return send_from_directory(frontend, path)
+
+
+messeges = ["hello,", " how", " are you!", " what can", " I do for you?"]
+
+
+def generate():
+    for message in messeges:
+        yield f'0:"{message}"\n'
+        time.sleep(1)
+    yield 'e:{"finishReason":"stop","usage":{"promptTokens":null,"completionTokens":null}}\n'
+    yield 'd:{"finishReason":"stop","usage":{"promptTokens":null,"completionTokens":null}}\n'
+
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    return Response(generate(), mimetype="text/plain")
 
 
 if __name__ == "__main__":
