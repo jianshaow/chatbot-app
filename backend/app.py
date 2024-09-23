@@ -33,5 +33,10 @@ def chat():
     return Response(generate(), mimetype="text/plain")
 
 
+@app.route("/api/chat/config", methods=["GET"])
+def config():
+    return {}
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)

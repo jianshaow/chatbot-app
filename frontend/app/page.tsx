@@ -1,28 +1,15 @@
-"use client";
+import Header from "@/app/components/header";
+import ChatSection from "./components/chat-section";
 
-import { useChat } from "ai/react";
-
-export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: process.env.NEXT_PUBLIC_CHAT_API || "http://localhost:3000/api/chat"
-  });
+export default function Home() {
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {messages.map(m => (
-        <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
-          {m.content}
+    <main className="h-screen w-screen flex justify-center items-center background-gradient">
+      <div className="space-y-2 lg:space-y-10 w-[90%] lg:w-[60rem]">
+        <Header />
+        <div className="h-[65vh] flex">
+          <ChatSection />
         </div>
-      ))}
-
-      <form onSubmit={handleSubmit}>
-        <input
-          className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
-          value={input}
-          placeholder="Say something..."
-          onChange={handleInputChange}
-        />
-      </form>
-    </div>
+      </div>
+    </main>
   );
 }
