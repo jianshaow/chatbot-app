@@ -1,4 +1,4 @@
-pre_event = [
+pre_events = [
     [
         {
             "type": "events",
@@ -26,7 +26,7 @@ messeges = [
     " I do",
     " for you?",
 ]
-post_event = [
+post_events = [
     [
         {
             "type": "suggested_questions",

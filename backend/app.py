@@ -1,7 +1,7 @@
 import os, time, json
 from flask import Flask, Response, send_from_directory
 
-from mock_data import pre_event, messeges, post_event
+from mock_data import pre_events, messeges, post_events
 
 frontend = os.path.abspath(os.path.join("../frontend", "out"))
 frontend = os.environ.get("FRONTEND_DIR", frontend)
@@ -20,13 +20,13 @@ def main(path):
 
 
 def generate():
-    for event in pre_event:
+    for event in pre_events:
         yield f"8:{json.dumps(event)}\n"
         time.sleep(0.2)
     for message in messeges:
         yield f'0:"{message}"\n'
         time.sleep(0.2)
-    for event in post_event:
+    for event in post_events:
         yield f"8:{json.dumps(event)}\n"
         time.sleep(0.2)
 
